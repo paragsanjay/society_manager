@@ -21,6 +21,15 @@ app.get('/home', function(req, res){
 });
 
 app.get('/login', function(req, res){
+con.query("SELECT * FROM info", function (err, result, fields) {
+    if (err) throw err;
+    console.log(result);
+  });
+
+  app.get('/hello', function (req, res) {
+  res.render('hello', { title: 'Hello', message: 'Hello there!' })
+});
+
    res.sendFile(__dirname + '/views/login.html');
 });
 
