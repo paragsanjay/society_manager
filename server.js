@@ -2,10 +2,12 @@ var express = require('express');
 var app = express();
 var path = require('path');
 app.use(express.static('public'))
+app.set("view engine","jade")
 var mysql = require('mysql');
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
 var con = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -19,19 +21,33 @@ app.get('/home', function(req, res){
 
    res.sendFile(__dirname + '/views/home.html');
 });
-
+/*
 app.get('/login', function(req, res){
 con.query("SELECT * FROM info", function (err, result, fields) {
     if (err) throw err;
     console.log(result);
-  });
+    res.sendFile(__dirname + '/views/login.html');
+});
+  });*/
+
+app.get('/login',function(req,res){
+
+con.query('select * from info', function (err, recordset) {
+            console.log(recordset);
+            if (err)
+                console.log(err)
+            else
+                res.render('login', { login: recordset });
+
+        });
+});
+
 
   app.get('/hello', function (req, res) {
   res.render('hello', { title: 'Hello', message: 'Hello there!' })
 });
 
-   res.sendFile(__dirname + '/views/login.html');
-});
+
 
 app.get('/register', function(req, res){
    res.sendFile(__dirname + '/views/register.html');
@@ -60,15 +76,15 @@ console.log("Running at Port 3000");
 
 
  var name=req.body.name;
-  var number=req.body.number;
+  var reg_no=req.body.reg_no;
   var address=req.body.address;
-  var no=req.body.no;
+  var phno=req.body.phno;
 
 console.log(req.body);
   console.log('You sent the name "' + name+'".\n');
 
 
-  var sql = "INSERT INTO info (name, Email,City ,Pincode) VALUES ('"+name+"', '"+number+"','"+address+"','"+no+"')";
+  var sql = "INSERT INTO info (name,reg_no,address,phno) VALUES ('"+name+"', '"+reg_no+"','"+address+"','"+phno+"')";
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log("1 record inserted");
