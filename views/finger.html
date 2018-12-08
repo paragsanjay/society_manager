@@ -57,24 +57,22 @@
                 <div class="row align-items-center">
 
                     <div class="col-lg order-lg-first">
-
-                        <ul class="nav nav-tabs justify-content-end" id="myTab" role="tablist">
+                         <ul class="nav nav-tabs justify-content-end" id="myTab" role="tablist">
                              <li class="nav-item">
                                 <a href="./home" class="nav-link"><i class="fe fe-home"></i> Home</a>
                             </li>
 
                             <li class="nav-item">
-                                <a href="./register" class="nav-link active"><i class="fa fa-registered"></i> Register</a>
+                                <a href="./register" class="nav-link"><i class="fa fa-registered"></i> Register</a>
                             </li>
                             <li class="nav-item">
-                                <a href="./finger" class="nav-link"><i class="fa fa-registered"></i> Finger</a>
+                                <a href="./finger" class="nav-link active"><i class="fa fa-registered"></i> Finger</a>
                             </li>
                             <li class="nav-item">
                                 <a href="./report" class="nav-link"><i class="fa fa-reorder"></i> Report</a>
                             </li>
 
                         </ul>
-
                     </div>
                 </div>
             </div>
@@ -83,31 +81,45 @@
             <div class="container">
             <div class="row">
               <div class="col-12">
-                <form action="./finger" method="post" class="card">
-                  <div class="card-header">
-                    <h3 class="card-title">Student Registration</h3>
-                  </div>
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-md-12">
+                <form action="./report" method="post" class="card">
+                    <div class="card-header">
+                                <div class="row" style="width:100%;">
+                                    <div class="col-6" style="margin-top:10px;">
+                                        <h3 class="card-title">Student Registration</h3>
+                                    </div>
+                                     </div>
+                            </div>
 
-                        <div class="form-group">
-                          <label class="form-label">Student Name</label>
-                          <input class="form-control" name="name"  placeholder=" Name..." type="text">
-                               <br><label class="form-label">Email</label>
-                          <input class="form-control" name="email" placeholder="Email..." type="text">
-                            <br><label class="form-label">Class</label>
-                          <input class="form-control" name="cls"  placeholder="Class..." type="text">
-                              <br><label class="form-label">Roll No</label>
-                          <input class="form-control" name="rno"  placeholder="Roll no..." type="text">
-                            <br><label class="form-label">Upload finger print</label>
-                            <input type="file" name="finger">
-                        </div>
+<form action="./report" enctype="multipart/form-data" method="all">
+        <iv>
+          <img id="blah" src="http://placehold.it/180" alt="your image" />
+        </iv>
+<br>
+        <div>
+     <input type="file" name="finger"  onchange="readURL(this);" />
+        </div>
+          <script>
+            function readURL(input) {
 
-                    </div>
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
 
-                  </div>
-                </div>
+    reader.onload = function(e) {
+      $('#blah').attr('src', e.target.result);
+    }
+
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+$("#imgInp").change(function() {
+  readURL(this);
+});
+          </script>
+
+
+
+
                 <div class="card-footer text-right">
                   <div class="d-flex">
 
